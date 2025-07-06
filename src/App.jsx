@@ -2,6 +2,193 @@ import React, { useState } from 'react';
 import Button from './components/Button';
 import Card from './components/Card';
 
+// Style definitions moved to the top for clarity and to prevent reference errors.
+const styles = {
+  header: {
+    backgroundColor: 'var(--white)',
+    boxShadow: 'var(--shadow)',
+    padding: '1rem 0',
+    position: 'sticky',
+    top: 0,
+    zIndex: 1000,
+  },
+  headerContainer: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    maxWidth: '1100px',
+    margin: 'auto',
+    padding: '0 1.5rem',
+  },
+  logo: {
+    color: 'var(--primary-dark)',
+    fontSize: '1.8rem',
+    fontWeight: 'bold',
+  },
+  nav: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '1.5rem',
+  },
+  navLink: {
+    color: 'var(--text-dark)',
+    fontWeight: '500',
+    fontSize: '1rem',
+    transition: 'color 0.2s ease',
+  },
+  hero: {
+    backgroundColor: 'var(--primary-light)',
+    color: 'var(--primary-dark)',
+    textAlign: 'center',
+    padding: '6rem 1.5rem',
+  },
+  heroTitle: {
+    fontSize: 'clamp(2.5rem, 5vw, 3.5rem)',
+    fontWeight: 'bold',
+    marginBottom: '1rem',
+  },
+  heroSubtitle: {
+    fontSize: '1.1rem',
+    maxWidth: '600px',
+    margin: '0 auto 2rem auto',
+    color: 'var(--text-light)',
+  },
+  section: {
+    padding: '5rem 1.5rem',
+  },
+  sectionGray: {
+    backgroundColor: 'var(--white)',
+    padding: '5rem 1.5rem',
+  },
+  sectionTitle: {
+    textAlign: 'center',
+    fontSize: '2.5rem',
+    fontWeight: 'bold',
+    marginBottom: '3rem',
+    color: 'var(--primary-dark)',
+  },
+  grid: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+    gap: '2rem',
+    maxWidth: '1100px',
+    margin: 'auto',
+  },
+  form: {
+    maxWidth: '600px',
+    margin: '0 auto',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '1.5rem',
+  },
+  input: {
+    padding: '1rem',
+    borderRadius: 'var(--border-radius)',
+    border: '1px solid #ccc',
+    width: '100%',
+    fontSize: '1rem',
+  },
+  footer: {
+    backgroundColor: 'var(--primary-dark)',
+    color: 'var(--white)',
+    textAlign: 'center',
+    padding: '2rem 1.5rem',
+  },
+  container: {
+    maxWidth: '1100px',
+    margin: 'auto',
+    padding: '0 1.5rem',
+  }
+};
+
+// Component definitions are now placed before the main App component.
+const Header = () => (
+  <header style={styles.header}>
+    <div style={styles.headerContainer}>
+      <h1 style={styles.logo}>Brightyield</h1>
+      <nav style={styles.nav}>
+        <a href="#home" style={styles.navLink}>Home</a>
+        <a href="#products" style={styles.navLink}>Products</a>
+        <a href="#apply" style={styles.navLink}><Button primary>Apply Now</Button></a>
+      </nav>
+    </div>
+  </header>
+);
+
+const HeroSection = () => (
+  <section id="home" style={styles.hero}>
+    <div style={styles.container}>
+      <h2 style={styles.heroTitle}>Financial Empowerment for Nigeria's Finest</h2>
+      <p style={styles.heroSubtitle}>Fast, reliable, and confidential loans designed for the brave men and women of the Nigerian Police Force.</p>
+      <Button primary>Get a Loan Today</Button>
+    </div>
+  </section>
+);
+
+const LoanProductsSection = () => (
+  <section id="products" style={styles.section}>
+    <div style={styles.container}>
+      <h2 style={styles.sectionTitle}>Our Loan Products</h2>
+      <div style={styles.grid}>
+        <Card title="Personal Loan" icon="\uD83D\uDCB0">
+          For your personal needs, from covering school fees to handling family emergencies.
+        </Card>
+        <Card title="Salary Advance" icon="\uD83D\uDCC8">
+          Bridge the gap until your next paycheck with a quick and easy salary advance.
+        </Card>
+        <Card title="Equipment Loan" icon="\uD83D\uDEE0\uFE0F">
+          Get the funds you need for essential gear and equipment to perform your best.
+        </Card>
+      </div>
+    </div>
+  </section>
+);
+
+const HowItWorksSection = () => (
+  <section style={styles.sectionGray}>
+    <div style={styles.container}>
+      <h2 style={styles.sectionTitle}>A Simple, Transparent Process</h2>
+      <div style={styles.grid}>
+        <Card title="1. Apply Online" icon="\uD83D\uDCF1">
+          Fill out our secure online form in minutes. It's fast, easy, and completely confidential.
+        </Card>
+        <Card title="2. Fast Approval" icon="\uD83D\uDD25">
+          Our dedicated team reviews your application promptly, with decisions typically made within 24 hours.
+        </Card>
+        <Card title="3. Receive Funds" icon="\uD83C\uDFE6">
+          Once approved, your funds are disbursed directly to your bank account without delay.
+        </Card>
+      </div>
+    </div>
+  </section>
+);
+
+const ApplicationSection = ({ formData, handleChange, handleSubmit }) => (
+  <section id="apply" style={styles.section}>
+    <div style={styles.container}>
+      <h2 style={styles.sectionTitle}>Apply for Your Loan Today</h2>
+      <form style={styles.form} onSubmit={handleSubmit}>
+        <input type="text" name="fullName" placeholder="Full Name" style={styles.input} value={formData.fullName} onChange={handleChange} required />
+        <input type="text" name="policeId" placeholder="Police ID Number" style={styles.input} value={formData.policeId} onChange={handleChange} required />
+        <input type="email" name="email" placeholder="Email Address" style={styles.input} value={formData.email} onChange={handleChange} required />
+        <input type="tel" name="phone" placeholder="Phone Number" style={styles.input} value={formData.phone} onChange={handleChange} required />
+        <input type="number" name="loanAmount" placeholder="Loan Amount (NGN)" style={styles.input} value={formData.loanAmount} onChange={handleChange} required />
+        <Button type="submit" primary>Submit Application</Button>
+      </form>
+    </div>
+  </section>
+);
+
+const Footer = () => (
+  <footer style={styles.footer}>
+    <div style={styles.container}>
+      <p>&copy; 2025 Brightyield Financial Services. All Rights Reserved.</p>
+      <p>Built with care for our nation's protectors.</p>
+    </div>
+  </footer>
+);
+
+
 const App = () => {
   const [formData, setFormData] = useState({
     fullName: '',
@@ -26,142 +213,28 @@ const App = () => {
       body: JSON.stringify({
         name: formData.fullName,
         email: formData.email,
-        message: `New Loan Application:\nPolice ID: ${formData.policeId}\nPhone: ${formData.phone}\nLoan Amount: ${formData.loanAmount}`,
+        message: `New Loan Application from ${formData.fullName}:\nPolice ID: ${formData.policeId}\nPhone: ${formData.phone}\nLoan Amount: NGN ${formData.loanAmount}`,
       }),
     });
 
     if (response.ok) {
-      alert('Application submitted successfully!');
+      alert('Application submitted successfully! We will be in touch shortly.');
       setFormData({ fullName: '', policeId: '', email: '', phone: '', loanAmount: '' });
     } else {
-      alert('Failed to submit application.');
+      alert('There was an error submitting your application. Please try again.');
     }
-  };
-
-  const styles = {
-    header: {
-      backgroundColor: 'var(--primary)',
-      color: 'white',
-      padding: '1rem 2rem',
-      display: 'flex',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-    },
-    nav: {
-      display: 'flex',
-      gap: '1rem',
-    },
-    navLink: {
-      color: 'white',
-      textDecoration: 'none',
-      fontWeight: 'bold',
-    },
-    hero: {
-      textAlign: 'center',
-      padding: '5rem 1rem',
-      background: 'var(--background)',
-    },
-    section: {
-      padding: '3rem 1rem',
-      textAlign: 'center',
-    },
-    sectionGray: {
-      backgroundColor: '#f7f7f7',
-      padding: '3rem 1rem',
-      textAlign: 'center',
-    },
-    container: {
-      maxWidth: '1200px',
-      margin: '0 auto',
-      display: 'flex',
-      justifyContent: 'center',
-      gap: '2rem',
-      flexWrap: 'wrap',
-    },
-    form: {
-      maxWidth: '600px',
-      margin: '0 auto',
-      display: 'flex',
-      flexDirection: 'column',
-      gap: '1.5rem',
-    },
-    input: {
-      padding: '1rem',
-      borderRadius: '5px',
-      border: '1px solid #ccc',
-      width: '100%',
-    },
-    footer: {
-      backgroundColor: '#333',
-      color: 'white',
-      textAlign: 'center',
-      padding: '1.5rem',
-    },
   };
 
   return (
     <div>
-      <header style={styles.header}>
-        <h1>Brightyield</h1>
-        <nav style={styles.nav}>
-          <a href="#" style={styles.navLink}>Home</a>
-          <a href="#" style={styles.navLink}>Loan Products</a>
-          <a href="#" style={styles.navLink}>About Us</a>
-          <Button>Apply Now</Button>
-        </nav>
-      </header>
-
-      <section style={styles.hero}>
-        <h2>Financial Empowerment for Nigeria's Police Force</h2>
-        <p>Fast, reliable, and confidential loans for those who serve.</p>
-        <Button>Get a Loan</Button>
-      </section>
-
-      <section style={styles.section}>
-        <h2>Our Loan Products</h2>
-        <div style={styles.container}>
-          <Card title="Personal Loan">
-            <p>For your personal needs, from school fees to rent.</p>
-          </Card>
-          <Card title="Salary Advance">
-            <p>Get an advance on your salary to cover urgent needs.</p>
-          </Card>
-          <Card title="Emergency Loan">
-            <p>For unexpected emergencies and unforeseen circumstances.</p>
-          </Card>
-        </div>
-      </section>
-
-      <section style={styles.sectionGray}>
-        <h2>How It Works</h2>
-        <div style={styles.container}>
-          <Card title="1. Apply Online">
-            <p>Fill out our simple and secure online application form.</p>
-          </Card>
-          <Card title="2. Get Approved">
-            <p>Our team will review your application and get back to you within 24 hours.</p>
-          </Card>
-          <Card title="3. Receive Funds">
-            <p>Once approved, the funds will be disbursed to your account.</p>
-          </Card>
-        </div>
-      </section>
-
-      <section style={styles.section}>
-        <h2>Apply for a Loan</h2>
-        <form style={styles.form} onSubmit={handleSubmit}>
-          <input type="text" name="fullName" placeholder="Full Name" style={styles.input} value={formData.fullName} onChange={handleChange} />
-          <input type="text" name="policeId" placeholder="Police ID Number" style={styles.input} value={formData.policeId} onChange={handleChange} />
-          <input type="email" name="email" placeholder="Email Address" style={styles.input} value={formData.email} onChange={handleChange} />
-          <input type="tel" name="phone" placeholder="Phone Number" style={styles.input} value={formData.phone} onChange={handleChange} />
-          <input type="number" name="loanAmount" placeholder="Loan Amount (NGN)" style={styles.input} value={formData.loanAmount} onChange={handleChange} />
-          <Button type="submit">Submit Application</Button>
-        </form>
-      </section>
-
-      <footer style={styles.footer}>
-        <p>&copy; 2025 Brightyield. All Rights Reserved.</p>
-      </footer>
+      <Header />
+      <main>
+        <HeroSection />
+        <LoanProductsSection />
+        <HowItWorksSection />
+        <ApplicationSection formData={formData} handleChange={handleChange} handleSubmit={handleSubmit} />
+      </main>
+      <Footer />
     </div>
   );
 };

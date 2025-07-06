@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import Button from './components/Button';
 import Card from './components/Card';
+import ApplyIcon from './components/icons/ApplyIcon';
+import ApprovalIcon from './components/icons/ApprovalIcon';
+import FundsIcon from './components/icons/FundsIcon';
 
 // Style definitions moved to the top for clarity and to prevent reference errors.
 const styles = {
@@ -130,13 +133,13 @@ const LoanProductsSection = () => (
     <div style={styles.container}>
       <h2 style={styles.sectionTitle}>Our Loan Products</h2>
       <div style={styles.grid}>
-        <Card title="Personal Loan" icon="\uD83D\uDCB0">
+        <Card title="Personal Loan" icon={<ApplyIcon />}>
           For your personal needs, from covering school fees to handling family emergencies.
         </Card>
-        <Card title="Salary Advance" icon="\uD83D\uDCC8">
+        <Card title="Salary Advance" icon={<ApprovalIcon />}>
           Bridge the gap until your next paycheck with a quick and easy salary advance.
         </Card>
-        <Card title="Equipment Loan" icon="\uD83D\uDEE0\uFE0F">
+        <Card title="Equipment Loan" icon={<FundsIcon />}>
           Get the funds you need for essential gear and equipment to perform your best.
         </Card>
       </div>
@@ -149,13 +152,13 @@ const HowItWorksSection = () => (
     <div style={styles.container}>
       <h2 style={styles.sectionTitle}>A Simple, Transparent Process</h2>
       <div style={styles.grid}>
-        <Card title="1. Apply Online" icon="\uD83D\uDCF1">
+        <Card title="1. Apply Online" icon={<ApplyIcon />}>
           Fill out our secure online form in minutes. It's fast, easy, and completely confidential.
         </Card>
-        <Card title="2. Fast Approval" icon="\uD83D\uDD25">
+        <Card title="2. Fast Approval" icon={<ApprovalIcon />}>
           Our dedicated team reviews your application promptly, with decisions typically made within 24 hours.
         </Card>
-        <Card title="3. Receive Funds" icon="\uD83C\uDFE6">
+        <Card title="3. Receive Funds" icon={<FundsIcon />}>
           Once approved, your funds are disbursed directly to your bank account without delay.
         </Card>
       </div>

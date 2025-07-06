@@ -3,153 +3,164 @@ import Button from './components/Button';
 import Card from './components/Card';
 
 const App = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [message, setMessage] = useState('');
+  const [formData, setFormData] = useState({
+    fullName: '',
+    policeId: '',
+    email: '',
+    phone: '',
+    loanAmount: '',
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const response = await fetch('/api/send-email', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ name, email, message }),
+      body: JSON.stringify({
+        name: formData.fullName,
+        email: formData.email,
+        message: `New Loan Application:\nPolice ID: ${formData.policeId}\nPhone: ${formData.phone}\nLoan Amount: ${formData.loanAmount}`,
+      }),
     });
 
     if (response.ok) {
-      alert('Message sent successfully!');
-      setName('');
-      setEmail('');
-      setMessage('');
+      alert('Application submitted successfully!');
+      setFormData({ fullName: '', policeId: '', email: '', phone: '', loanAmount: '' });
     } else {
-      alert('Failed to send message.');
+      alert('Failed to submit application.');
     }
   };
 
   const styles = {
     header: {
       backgroundColor: 'var(--primary)',
-      color: 'var(--text)',
-      textAlign: 'center',
-      padding: '1rem',
+      color: 'white',
+      padding: '1rem 2rem',
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+    },
+    nav: {
+      display: 'flex',
+      gap: '1rem',
+    },
+    navLink: {
+      color: 'white',
+      textDecoration: 'none',
+      fontWeight: 'bold',
     },
     hero: {
       textAlign: 'center',
-      padding: '4rem 1rem',
+      padding: '5rem 1rem',
+      background: 'var(--background)',
     },
-    services: {
-      padding: '2rem 1rem',
-      backgroundColor: 'var(--accent)',
+    section: {
+      padding: '3rem 1rem',
+      textAlign: 'center',
     },
-    servicesContainer: {
+    sectionGray: {
+      backgroundColor: '#f7f7f7',
+      padding: '3rem 1rem',
+      textAlign: 'center',
+    },
+    container: {
+      maxWidth: '1200px',
+      margin: '0 auto',
       display: 'flex',
       justifyContent: 'center',
-      gap: '1rem',
+      gap: '2rem',
       flexWrap: 'wrap',
     },
-    about: {
-      padding: '2rem 1rem',
-      backgroundColor: 'var(--background)',
-      textAlign: 'center',
-    },
-    contact: {
-      padding: '2rem 1rem',
-      textAlign: 'center',
-    },
-    contactForm: {
-      maxWidth: '500px',
+    form: {
+      maxWidth: '600px',
       margin: '0 auto',
       display: 'flex',
       flexDirection: 'column',
-      gap: '1rem',
+      gap: '1.5rem',
     },
     input: {
-      padding: '0.8rem',
+      padding: '1rem',
       borderRadius: '5px',
       border: '1px solid #ccc',
       width: '100%',
-    },
-    textarea: {
-      padding: '0.8rem',
-      borderRadius: '5px',
-      border: '1px solid #ccc',
-      width: '100%',
-      minHeight: '100px',
     },
     footer: {
       backgroundColor: '#333',
       color: 'white',
       textAlign: 'center',
-      padding: '1rem',
+      padding: '1.5rem',
     },
   };
 
   return (
     <div>
       <header style={styles.header}>
-        <h1>SafeTrip</h1>
+        <h1>Brightyield</h1>
+        <nav style={styles.nav}>
+          <a href="#" style={styles.navLink}>Home</a>
+          <a href="#" style={styles.navLink}>Loan Products</a>
+          <a href="#" style={styles.navLink}>About Us</a>
+          <Button>Apply Now</Button>
+        </nav>
       </header>
 
       <section style={styles.hero}>
-        <h2>Your Reliable Transportation Partner</h2>
-        <p>Safe, comfortable, and affordable transport services across Nigeria.</p>
-        <Button>Book Now</Button>
+        <h2>Financial Empowerment for Nigeria's Police Force</h2>
+        <p>Fast, reliable, and confidential loans for those who serve.</p>
+        <Button>Get a Loan</Button>
       </section>
 
-      <section style={styles.services}>
-        <h2 style={{ textAlign: 'center', marginBottom: '2rem' }}>Our Services</h2>
-        <div style={styles.servicesContainer}>
-          <Card title="Interstate Travel">
-            <p>Travel between major cities in Nigeria.</p>
+      <section style={styles.section}>
+        <h2>Our Loan Products</h2>
+        <div style={styles.container}>
+          <Card title="Personal Loan">
+            <p>For your personal needs, from school fees to rent.</p>
           </Card>
-          <Card title="City Taxi">
-            <p>Your everyday taxi service within the city.</p>
+          <Card title="Salary Advance">
+            <p>Get an advance on your salary to cover urgent needs.</p>
           </Card>
-          <Card title="Logistics">
-            <p>Reliable and timely delivery of your goods.</p>
-          </Card>
-          <Card title="Car Rentals">
-            <p>Rent a car for your personal or business needs.</p>
+          <Card title="Emergency Loan">
+            <p>For unexpected emergencies and unforeseen circumstances.</p>
           </Card>
         </div>
       </section>
 
-      <section style={styles.about}>
-        <h2>About Us</h2>
-        <p>We are committed to providing the best transportation experience in Nigeria. Our drivers are professional, and our vehicles are top-notch.</p>
+      <section style={styles.sectionGray}>
+        <h2>How It Works</h2>
+        <div style={styles.container}>
+          <Card title="1. Apply Online">
+            <p>Fill out our simple and secure online application form.</p>
+          </Card>
+          <Card title="2. Get Approved">
+            <p>Our team will review your application and get back to you within 24 hours.</p>
+          </Card>
+          <Card title="3. Receive Funds">
+            <p>Once approved, the funds will be disbursed to your account.</p>
+          </Card>
+        </div>
       </section>
 
-      <section style={styles.contact}>
-        <h2>Contact Us</h2>
-        <form style={styles.contactForm} onSubmit={handleSubmit}>
-          <input
-            type="text"
-            placeholder="Your Name"
-            style={styles.input}
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-          <input
-            type="email"
-            placeholder="Your Email"
-            style={styles.input}
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <textarea
-            placeholder="Your Message"
-            style={styles.textarea}
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-          ></textarea>
-          <Button type="submit">Send Message</Button>
+      <section style={styles.section}>
+        <h2>Apply for a Loan</h2>
+        <form style={styles.form} onSubmit={handleSubmit}>
+          <input type="text" name="fullName" placeholder="Full Name" style={styles.input} value={formData.fullName} onChange={handleChange} />
+          <input type="text" name="policeId" placeholder="Police ID Number" style={styles.input} value={formData.policeId} onChange={handleChange} />
+          <input type="email" name="email" placeholder="Email Address" style={styles.input} value={formData.email} onChange={handleChange} />
+          <input type="tel" name="phone" placeholder="Phone Number" style={styles.input} value={formData.phone} onChange={handleChange} />
+          <input type="number" name="loanAmount" placeholder="Loan Amount (NGN)" style={styles.input} value={formData.loanAmount} onChange={handleChange} />
+          <Button type="submit">Submit Application</Button>
         </form>
       </section>
 
       <footer style={styles.footer}>
-        <p>&copy; 2025 SafeTrip. All Rights Reserved.</p>
+        <p>&copy; 2025 Brightyield. All Rights Reserved.</p>
       </footer>
     </div>
   );

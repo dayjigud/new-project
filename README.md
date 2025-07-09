@@ -1,12 +1,32 @@
-# React + Vite
+# Brightyield Financial Services
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a web application for Brightyield Financial Services, a company that provides loans to members of the Nigerian Police Force.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+*   **Loan Products:** View different types of loans available, including Personal Loans, Salary Advances, and Equipment Loans.
+*   **Simple Application Process:** A clear and simple 3-step process to apply for a loan.
+*   **Online Application Form:** A secure form to submit loan applications.
+*   **Email Notifications:** The application form uses a serverless function to send an email notification upon submission.
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+*   **Frontend:** React, Vite
+*   **Backend:** Serverless function (Vercel) for email notifications.
+*   **Styling:** Inline CSS with a custom design system.
+
+## Getting Started
+
+1.  Clone the repository:
+    ```bash
+    git clone https://github.com/dayjigud/new-project.git
+    ```
+2.  Install dependencies:
+    ```bash
+    npm install
+    ```
+3.  Start the development server:
+    ```bash
+    npm run dev
+    ```
+4.  Open your browser and visit `http://localhost:5173`

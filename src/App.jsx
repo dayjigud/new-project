@@ -8,8 +8,10 @@ import FundsIcon from './components/icons/FundsIcon';
 // Style definitions moved to the top for clarity and to prevent reference errors.
 const styles = {
   header: {
-    backgroundColor: 'var(--white)',
-    boxShadow: 'var(--shadow)',
+    backgroundColor: 'rgba(255, 255, 255, 0.25)',
+    backdropFilter: 'blur(10px)',
+    borderBottom: '1px solid rgba(255, 255, 255, 0.18)',
+    boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)',
     padding: '1rem 0',
     position: 'sticky',
     top: 0,
@@ -166,8 +168,22 @@ const HowItWorksSection = () => (
   </section>
 );
 
+const AboutNpfSection = () => (
+  <section style={styles.section}>
+    <div style={styles.container}>
+      <h2 style={styles.sectionTitle}>About the Nigerian Police Force</h2>
+      <p style={{ ...styles.heroSubtitle, textAlign: 'left', marginBottom: '1.5rem' }}>
+        Founded in 1930, the Nigeria Police Force (NPF) is the principal law enforcement and the lead security agency in Nigeria. With a force of over 371,800, it is one of the largest police forces in Africa. The NPF is a federal agency with a centralized command structure.
+      </p>
+      <p style={{ ...styles.heroSubtitle, textAlign: 'left' }}>
+        <strong>Our Mission:</strong> To provide safety and security in Nigeria, to protect the rights of all persons, and to build a more peaceful and just society. We are committed to upholding the highest standards of integrity, professionalism, and respect for human rights.
+      </p>
+    </div>
+  </section>
+);
+
 const ApplicationSection = ({ formData, handleChange, handleSubmit }) => (
-  <section id="apply" style={styles.section}>
+  <section id="apply" style={{...styles.section, backgroundColor: 'var(--white)'}}>
     <div style={styles.container}>
       <h2 style={styles.sectionTitle}>Apply for Your Loan Today</h2>
       <form style={styles.form} onSubmit={handleSubmit}>
@@ -235,6 +251,7 @@ const App = () => {
         <HeroSection />
         <LoanProductsSection />
         <HowItWorksSection />
+        <AboutNpfSection />
         <ApplicationSection formData={formData} handleChange={handleChange} handleSubmit={handleSubmit} />
       </main>
       <Footer />
